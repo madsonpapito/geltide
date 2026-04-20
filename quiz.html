@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background-color: #8327cc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .quiz-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quiz-header-purple {
+            background-color: #8327cc;
+            color: white;
+            padding: 20px;
+        }
+
+        .step-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-info i {
+            color: #fce300;
+            margin-right: 5px;
+        }
+
+        .progress-bar-container {
+            background-color: rgba(255, 255, 255, 0.3);
+            height: 6px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #00d166;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-body {
+            padding: 40px 30px;
+            background: white;
+            border-radius: 16px 16px 0 0;
+            margin-top: -10px;
+        }
+
+        .question-title {
+            font-size: 24px;
+            color: #2c0b4a;
+            font-weight: 800;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-title i {
+            color: #5d149c;
+        }
+
+        .question-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 30px;
+            margin-left: 38px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background-color: #f7f8fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: #8327cc;
+            background-color: #fcf9ff;
+        }
+
+        .option-title {
+            font-weight: 800;
+            font-size: 16px;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 500px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .final-step {
+            text-align: center;
+        }
+        .final-step h2 {
+            font-size: 28px;
+            color: #8327cc;
+            margin-bottom: 15px;
+        }
+        .final-step p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .cta-btn {
+            background-color: #00d166;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover {
+            background-color: #00b355;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="quiz-container">
+        
+        <div class="quiz-header-purple" id="quiz-header">
+            <div class="step-info">
+                <span><i class="fa-solid fa-star"></i> Step <span id="current-step-num">1</span> of 6</span>
+                <span id="current-progress">0 %</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <div class="quiz-body">
+            
+            <!-- Step 1 -->
+            <div class="step active" id="step-1">
+                <h2 class="question-title"><i class="fa-solid fa-calendar-alt"></i> What's your age range?</h2>
+                <p class="question-subtitle">This helps us optimize your formula</p>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">18-29 years</span>
+                        <span class="option-desc">Young Adult</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">30-44 years</span>
+                        <span class="option-desc">Prime Years</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">45-59 years</span>
+                        <span class="option-desc">Experienced</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">60+ years</span>
+                        <span class="option-desc">Golden Years</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" id="step-2">
+                <h2 class="question-title"><i class="fa-solid fa-weight-scale"></i> What's your current weight range?</h2>
+                <p class="question-subtitle">Select the range that fits you best</p>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">100-150 lbs</span>
+                        <span class="option-desc">Light Weight</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">151-200 lbs</span>
+                        <span class="option-desc">Moderate Weight</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">201-250 lbs</span>
+                        <span class="option-desc">Heavy Weight</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">250+ lbs</span>
+                        <span class="option-desc">Extra Heavy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" id="step-3">
+                <h2 class="question-title"><i class="fa-solid fa-ruler-vertical"></i> What's your height range?</h2>
+                <p class="question-subtitle">This helps calculate your ideal dosage</p>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">Under 5'4"</span>
+                        <span class="option-desc">Shorter Height</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">5'4" - 5'8"</span>
+                        <span class="option-desc">Average Height</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">5'9" - 6'1"</span>
+                        <span class="option-desc">Tall Height</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">Over 6'1"</span>
+                        <span class="option-desc">Very Tall</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step" id="step-4">
+                <h2 class="question-title"><i class="fa-solid fa-bullseye"></i> How much weight do you want to lose?</h2>
+                <p class="question-subtitle">Choose your target goal</p>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">5-15 lbs</span>
+                        <span class="option-desc">Light Trim</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">16-30 lbs</span>
+                        <span class="option-desc">Moderate Loss</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">31-50 lbs</span>
+                        <span class="option-desc">Major Loss</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">50+ lbs</span>
+                        <span class="option-desc">Full Transform</span>
+                    </button>
+                </div>
+            </div>
+
+             <!-- Step 5 -->
+             <div class="step" id="step-5">
+                <h2 class="question-title"><i class="fa-solid fa-bolt"></i> How fast do you want results?</h2>
+                <p class="question-subtitle">Customize your journey</p>
+                <div class="options-grid">
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">As fast as possible</span>
+                        <span class="option-desc">Aggressive</span>
+                    </button>
+                    <button class="option-btn" onclick="nextStep()">
+                        <span class="option-title">Steady & Safe</span>
+                        <span class="option-desc">Balanced</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 6 (Final Loading & CTA) -->
+            <div class="step" id="step-6">
+                <div class="final-step" id="loading-stage">
+                    <h2><i class="fa-solid fa-spinner fa-spin"></i> Formulating...</h2>
+                    <p>We are customizing the Gelatide formula to fit your body type.</p>
+                </div>
+                <div class="final-step invisible" id="result-stage">
+                    <h2 style="color:#000;"><i class="fa-solid fa-brain" style="color:#8327cc; font-size:40px; margin-bottom:10px; display:block;"></i> Find Your Ideal <span style="color:#8327cc;">Gelatide</span> Formula</h2>
+                    <p style="font-size: 14px;">Answer these quick questions to craft a powerful, customized solution—perfectly aligned with your body, your goals, and your lifestyle. Get ready for results you'll see and feel!</p>
+                    <button class="cta-btn" onclick="sendToParent()">LET'S START! <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+        const percentages = [0, 20, 40, 60, 80, 100];
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                document.getElementById('step-' + currentStep).classList.remove('active');
+                currentStep++;
+                
+                if (currentStep === totalSteps) {
+                    // Hide Header for the final results screen or show 100%
+                    document.getElementById('quiz-header').style.display = 'none';
+                    document.getElementById('step-' + currentStep).classList.add('active');
+                    notifyResize();
+                    
+                    // Simulate loading
+                    setTimeout(() => {
+                        document.getElementById('loading-stage').classList.add('invisible');
+                        document.getElementById('result-stage').classList.remove('invisible');
+                        document.getElementById('result-stage').classList.add('visible');
+                        notifyResize();
+                    }, 2000);
+                    
+                } else {
+                    document.getElementById('step-' + currentStep).classList.add('active');
+                    document.getElementById('current-step-num').innerText = currentStep;
+                    
+                    let bgPercent = percentages[currentStep - 1] + " %";
+                    document.getElementById('current-progress').innerText = bgPercent;
+                    document.getElementById('progress-bar-fill').style.width = percentages[currentStep - 1] + "%";
+                    notifyResize();
+                }
+            }
+        }
+
+        // Send height to parent iframe to adjust dynamically
+        function notifyResize() {
+            if(window.parent) {
+                window.parent.postMessage({ type: 'resize', height: document.body.scrollHeight }, '*');
+            }
+        }
+
+        // Initial setup
+        window.onload = function() {
+            notifyResize();
+        };
+        
+        function sendToParent() {
+            // Action to execute when quiz is fully completed
+            if(window.parent) {
+                window.parent.postMessage({ action: 'showOffers' }, '*');
+            }
+        }
+    </script>
+</body>
+</html>
