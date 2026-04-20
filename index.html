@@ -119,92 +119,7 @@
             <iframe id="potes-frame" src="quiz.html" style="width:100%; min-height: 500px; border:none;" scrolling="no" loading="lazy"></iframe>
         </div>
 
-        <!-- Offers Section - Hidden until quiz completes -->
-        <div class="offers-section hidden-offers" id="offers-section">
-            <div class="container">
-                <div class="pricing-cards">
-                    <!-- Basic 2 Bottles -->
-                    <div class="pricing-card basic">
-                        <div class="card-header">Basic</div>
-                        <div class="card-body">
-                            <h2>2 BOTTLES</h2>
-                            <div class="price-strike"><s>$217</s> <span class="current-price">$158</span></div>
-                            <p class="supply">60 DAY SUPPLY</p>
-                            <img src="image/2 (3).png" alt="2 Bottles" class="bottle-img">
-                            <ul class="features">
-                                <li><strong>+ $9.99 SHIPPING</strong></li>
-                                <li><i class="fa-solid fa-check"></i> 100% SECURE</li>
-                                <li><i class="fa-solid fa-check"></i> 60 DAYS GUARANTEE</li>
-                            </ul>
-                            <button class="buy-btn">BUY NOW</button>
-                            <img src="image/cards.webp" alt="Cards" class="cards-img">
-                        </div>
-                    </div>
 
-                    <!-- Best Value 6 Bottles -->
-                    <div class="pricing-card best-value">
-                        <div class="card-header best-header">BEST VALUE!</div>
-                        <div class="card-body best-body">
-                            <h2>6 BOTTLES</h2>
-                            <div class="price-strike text-white"><s>$888</s> <span class="current-price text-white">$294</span></div>
-                            <p class="supply text-white">180 DAY SUPPLY</p>
-                            <img src="image/6.png" alt="6 Bottles" class="bottle-img">
-                            <ul class="features text-white">
-                                <li><strong>FREE SHIPPING</strong></li>
-                                <li><i class="fa-solid fa-check"></i> 100% SECURE</li>
-                                <li><i class="fa-solid fa-check"></i> 60 DAYS GUARANTEE</li>
-                            </ul>
-                            <button class="buy-btn btn-green">BUY NOW</button>
-                            <img src="image/cards.webp" alt="Cards" class="cards-img">
-                            <div class="shipping-info">FREE U.S. SHIPPING</div>
-                        </div>
-                    </div>
-
-                    <!-- Good Value 3 Bottles -->
-                    <div class="pricing-card good-value">
-                        <div class="card-header">Good Value</div>
-                        <div class="card-body">
-                            <h2>3 BOTTLES</h2>
-                            <div class="price-strike"><s>$294</s> <span class="current-price">$217</span></div>
-                            <p class="supply">90 DAY SUPPLY</p>
-                            <img src="image/3 (1).png" alt="3 Bottles" class="bottle-img">
-                            <ul class="features">
-                                <li><strong>FREE SHIPPING</strong></li>
-                                <li><i class="fa-solid fa-check"></i> 100% SECURE</li>
-                                <li><i class="fa-solid fa-check"></i> 60 DAYS GUARANTEE</li>
-                            </ul>
-                            <button class="buy-btn">BUY NOW</button>
-                            <img src="image/cards.webp" alt="Cards" class="cards-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guarantee Section -->
-            <div class="guarantee-section">
-                <div class="container guarantee-container">
-                    <h2 class="guarantee-title">100% Satisfaction or Your Money Back<br><span class="red-highlight">60-Day Unconditional Guarantee</span></h2>
-                    
-                    <div class="guarantee-content">
-                        <div class="guarantee-badge">
-                            <img src="image/guarantee-badge.webp" alt="60-Day Guarantee">
-                        </div>
-                        <div class="guarantee-text">
-                            <p>We're so certain that Gelatide will give you remarkable results that we're willing to shoulder all the risk for a full 60 days. From the moment your order arrives, start taking Gelatide daily and pay close attention to how you feel.</p>
-                            <p>Within just a few days, you may notice faster thinking and better memory. Continue for a few weeks or months, and you will feel like your memory has returned to its healthy best.</p>
-                            <p>If at any point during these 60 days you don't feel Gelatide is delivering on the promise we've made, just let us know. Our team will refund every penny, no questions asked.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trust-badges">
-                        <img src="image/gmp.png" alt="GMP">
-                        <img src="image/gmo.png" alt="Non-GMO">
-                        <img src="image/nat.png" alt="100% Natural">
-                        <img src="image/foreign.png" alt="Made in USA">
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="tags-section container pb-4">
             <p class="tags-title" style="display: flex; align-items: center; justify-content: center; gap: 5px; color: #555;">
@@ -443,14 +358,8 @@
                 if (e.data && e.data.type === 'resize') {
                     if (iframe) iframe.style.height = e.data.height + 'px';
                 }
-                if (e.data && e.data.action === 'showOffers') {
-                    // Hide Quiz
-                    document.getElementById('delayed-content').classList.add('invisible');
-                    document.getElementById('delayed-content').classList.remove('visible');
-                    // Show Offers
-                    document.getElementById('offers-section').classList.remove('hidden-offers');
-                    // Scroll up lightly
-                    document.getElementById('offers-section').scrollIntoView({ behavior: 'smooth' });
+                if (e.data && e.data.type === 'resize_trigger') {
+                    setTimeout(setHeightToContent, 100);
                 }
             });
         });
