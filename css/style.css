@@ -47,24 +47,23 @@ main {
     display: none;
 }
 
-/* TODAY HEADER */
-
+/* ITV HEADER */
 .today-header {
-    font-family: 'Nunito', Arial, Helvetica, sans-serif;
-    background-color: #fff;
-    border-bottom: 1px solid #e5e7eb;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    background-color: #001e30;
+    border-bottom: 4px solid #ffde00; /* Linha amarela sutil da ITV */
     position: relative;
 }
 
 .today-header-container {
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    height: 50px;
+    height: 60px;
 }
 
 .today-header-left {
@@ -91,11 +90,16 @@ main {
 }
 
 .today-nav span {
-    color: #333;
-    font-weight: 600;
-    font-size: 0.9375rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.85rem;
     padding: 0.5rem 0;
-    cursor: default;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.today-nav span:hover {
+    color: #ffde00;
 }
 
 .today-header-right {
@@ -113,7 +117,7 @@ main {
     background: none;
     border: none;
     cursor: pointer;
-    color: #333;
+    color: #fff;
     font-size: 1rem;
     border-radius: 50%;
     transition: background-color 0.2s;
@@ -160,11 +164,20 @@ main {
 }
 
 .hero-content h1 {
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 1.25;
-    margin-bottom: 0.5rem;
-    color: #374151;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.updated-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
 }
 
 .hero-content .subtitle {

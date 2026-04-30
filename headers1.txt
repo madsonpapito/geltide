@@ -1,0 +1,14 @@
+HTTP/1.1 302 Found
+Content-Type: text/html; charset=utf-8
+Content-Length: 118
+Connection: keep-alive
+Location: https://gelatideburn.com/?rtkcid=69e775c8d376494670f9cfa8&rtkcmpid=69e69bb9d49d58c5423a422f
+Set-Cookie: redcmps=W3siaWQiOiI2OWU2OWJiOWQ0OWQ1OGM1NDIzYTQyMmYiLCJ0IjoiMjAyNi0wNC0yMVQxMzowNDowOC4yNTEzOTc2MjlaIn1d; Path=/; Domain=go.gelatideburn.com; Expires=Wed, 22 Apr 2026 13:04:08 GMT; Secure; SameSite=None
+Set-Cookie: redhash=NjllNzc1YzhkMzc2NDk0NjcwZjljZmE4fDB8NjllNjliYjlkNDlkNThjNTQyM2E0MjJmfDY5ZTY4OTAzMGE3OTZhZDI1ODJjMmY0OXw4YzhhYTNjMi0yOWU3LTQ0MjAtOWI5Ni0yNzE0OTBmNTFmNGJ8MTc3Njc3NjY0OA==; Path=/; Domain=go.gelatideburn.com; Expires=Wed, 21 Apr 2027 13:04:08 GMT; Secure; SameSite=None
+Date: Tue, 21 Apr 2026 13:04:08 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: Content-Length,Content-Range
+X-Kong-Upstream-Latency: 22
+X-Kong-Proxy-Latency: 11
+X-Kong-Request-Id: a69db223bc61fc18415d067c7bd4895d
+

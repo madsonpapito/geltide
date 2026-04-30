@@ -1469,7 +1469,7 @@
                         </ul>
                     </div>
                 </div>
-                <a class="btn" href="https://go.gelatideburn.com/click/1">BUY NOW</a>
+                <a class="btn" href="https://go.gelatideburn.com/click/1" onclick="return trackIC(event)">BUY NOW</a>
                 <div class="cards-pay">
                     <img src="images/cards.webp" alt="">
                 </div>
@@ -1503,7 +1503,7 @@
                                 +SURPRISE 🎁</div>
                         </div>
                     </div>
-                    <a class="btn btn--green" href="https://go.gelatideburn.com/click/3">BUY NOW</a>
+                    <a class="btn btn--green" href="https://go.gelatideburn.com/click/3" onclick="return trackIC(event)">BUY NOW</a>
                     <div class="cards-pay">
                         <img src="images/cards.webp" alt="">
                     </div>
@@ -1537,7 +1537,7 @@
                         </ul>
                     </div>
                 </div>
-                <a class="btn" href="https://go.gelatideburn.com/click/2">BUY NOW</a>
+                <a class="btn" href="https://go.gelatideburn.com/click/2" onclick="return trackIC(event)">BUY NOW</a>
                 <div class="cards-pay">
                     <img src="images/cards.webp" alt="">
                 </div>
@@ -1719,6 +1719,28 @@
                 }
             }
         });
+
+        // Função de Rastreio InitiateCheckout (Facebook e Utmify)
+        function trackIC(event) {
+            event.preventDefault();
+            const url = event.currentTarget.href;
+
+            // Dispara InitiateCheckout no Facebook (via página pai)
+            if (window.parent && window.parent.fbq) {
+                window.parent.fbq('track', 'InitiateCheckout');
+            }
+
+            // Opcional: Notifica o RedTrack sobre a conversão de IC
+            const rtPixel = new Image();
+            rtPixel.src = 'https://go.gelatideburn.com/postback?event=initiate_checkout';
+
+            // Pequeno atraso para garantir o disparo do pixel antes do redirecionamento
+            setTimeout(() => {
+                window.top.location.href = url;
+            }, 350);
+
+            return false;
+        }
     </script>
 <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon="{" version":"2024.11.0","token":"c34a902144944d95bd972be0e7501ea1","r":1,"server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
 

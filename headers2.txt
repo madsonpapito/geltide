@@ -1,0 +1,15 @@
+HTTP/1.1 302 Found
+Content-Type: text/html; charset=utf-8
+Content-Length: 248
+Connection: keep-alive
+Location: https://buygoods.com/secure/checkout.html?aff_id=7183&account_id=12278&product_codename=PP_GLT2UNITS_AFF&redirect=aHR0cHM6Ly9pbXByb3ZpbmdvdXJoZWFsdGguY29tL2dsdC1hZmYtYnV5LXVwMS8=&subid=69e775c887d80e4506a640b7
+Set-Cookie: redhash=NjllNzc1Yzg4N2Q4MGU0NTA2YTY0MGI3fDB8NjllNjliYjlkNDlkNThjNTQyM2E0MjJmfDY5ZTY4OTAzMGE3OTZhZDI1ODJjMmY0OXw4YzhhYTNjMi0yOWU3LTQ0MjAtOWI5Ni0yNzE0OTBmNTFmNGJ8MTc3Njc3NjY0OA==; Path=/; Domain=go.gelatideburn.com; Expires=Wed, 21 Apr 2027 13:04:08 GMT; Secure; SameSite=None
+Set-Cookie: lp_redcmps=W3siaWQiOiI2OWU2OWJiOWQ0OWQ1OGM1NDIzYTQyMmYiLCJ0IjoiMjAyNi0wNC0yMVQxMzowNDowOC41MDY0MzA2OVoifV0=; Path=/; Domain=go.gelatideburn.com; Expires=Wed, 22 Apr 2026 13:04:08 GMT; Secure; SameSite=None
+Set-Cookie: redtrack-lp-click-69e68aa3bb51cc39ae8c74ee=NjllNzc1Yzg4N2Q4MGU0NTA2YTY0MGI3; Path=/; Domain=go.gelatideburn.com; Expires=Tue, 21 Apr 2026 14:04:08 GMT; Secure; SameSite=None
+Date: Tue, 21 Apr 2026 13:04:08 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: Content-Length,Content-Range
+X-Kong-Upstream-Latency: 37
+X-Kong-Proxy-Latency: 11
+X-Kong-Request-Id: 58a87d5dae9a134fec01880d84082b01
+
