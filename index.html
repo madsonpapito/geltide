@@ -439,38 +439,42 @@ src="https://www.facebook.com/tr?id=2440464006388927&ev=PageView&noscript=1"
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var player = document.querySelector("vturb-smartplayer");
+        (function() {
             var quizShown = false;
-
-            if (player) {
-                // Evento disparado quando o player está pronto
-                player.addEventListener("player:ready", function() {
-                    console.log("Player Vturb pronto");
-                });
-
-                // Monitora o tempo do vídeo (usando os dois nomes de evento mais comuns)
-                const handleTimeUpdate = function(event) {
-                    var currentTime = event.detail ? event.detail.currentTime : player.currentTime;
-                    
-                    if (currentTime >= 2670 && !quizShown) {
-                        var hiddenElements = document.querySelectorAll(".invisible");
-                        hiddenElements.forEach(function(el) {
-                            el.classList.remove("invisible");
-                            el.style.display = "block"; // Garante que o display none seja removido
-                        });
-                        quizShown = true;
-                        
-                        // Força o redimensionamento do iframe
-                        window.dispatchEvent(new Event('resize'));
-                        console.log("Quiz exibido aos 44:30");
-                    }
-                };
-
-                player.addEventListener("video:timeupdate", handleTimeUpdate);
-                player.addEventListener("timeupdate", handleTimeUpdate);
+            var player = document.querySelector("vturb-smartplayer");
+            
+            function showQuiz() {
+                if (quizShown) return;
+                var iframe = document.getElementById('potes-frame');
+                if (iframe) {
+                    iframe.classList.remove("invisible");
+                    iframe.style.setProperty("display", "block", "important");
+                    iframe.style.setProperty("visibility", "visible", "important");
+                    iframe.style.height = "auto";
+                }
+                quizShown = true;
+                window.dispatchEvent(new Event('resize'));
+                console.log("Quiz liberado com sucesso!");
             }
-        });
+
+            // Verifica o tempo do vídeo a cada 1 segundo
+            var checkInterval = setInterval(function() {
+                var player = document.querySelector("vturb-smartplayer");
+                if (player && typeof player.currentTime !== 'undefined') {
+                    if (player.currentTime >= 2670) {
+                        showQuiz();
+                        clearInterval(checkInterval);
+                    }
+                }
+            }, 1000);
+
+            // Backup: Caso o player use o sistema de eventos customizados
+            document.addEventListener("video:timeupdate", function(e) {
+                if (e.detail && e.detail.currentTime >= 2670) {
+                    showQuiz();
+                }
+            });
+        })();
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
