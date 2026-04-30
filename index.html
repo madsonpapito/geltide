@@ -439,14 +439,21 @@ src="https://www.facebook.com/tr?id=2440464006388927&ev=PageView&noscript=1"
     </main>
 
     <script>
-        // Pitch Delay atualizado para 2670 segundos
-        var delaySeconds = 2670;
         var player = document.querySelector("vturb-smartplayer");
+        var quizShown = false;
 
-        player.addEventListener("player:ready", function() {
-            player.displayHiddenElements(delaySeconds, [".invisible"], {
-                persist: true,
-            });
+        player.addEventListener("video:timeupdate", function(event) {
+            var currentTime = event.detail.currentTime;
+            if (currentTime >= 2670 && !quizShown) {
+                var hiddenElements = document.querySelectorAll(".invisible");
+                hiddenElements.forEach(function(el) {
+                    el.classList.remove("invisible");
+                });
+                quizShown = true;
+                
+                // Disparar o ResizeObserver para garantir o tamanho do iframe
+                window.dispatchEvent(new Event('resize'));
+            }
         });
     </script>
     <script>
