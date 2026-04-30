@@ -439,20 +439,36 @@ src="https://www.facebook.com/tr?id=2440464006388927&ev=PageView&noscript=1"
     </main>
 
     <script>
-        var player = document.querySelector("vturb-smartplayer");
-        var quizShown = false;
+        document.addEventListener("DOMContentLoaded", function() {
+            var player = document.querySelector("vturb-smartplayer");
+            var quizShown = false;
 
-        player.addEventListener("video:timeupdate", function(event) {
-            var currentTime = event.detail.currentTime;
-            if (currentTime >= 2670 && !quizShown) {
-                var hiddenElements = document.querySelectorAll(".invisible");
-                hiddenElements.forEach(function(el) {
-                    el.classList.remove("invisible");
+            if (player) {
+                // Evento disparado quando o player está pronto
+                player.addEventListener("player:ready", function() {
+                    console.log("Player Vturb pronto");
                 });
-                quizShown = true;
-                
-                // Disparar o ResizeObserver para garantir o tamanho do iframe
-                window.dispatchEvent(new Event('resize'));
+
+                // Monitora o tempo do vídeo (usando os dois nomes de evento mais comuns)
+                const handleTimeUpdate = function(event) {
+                    var currentTime = event.detail ? event.detail.currentTime : player.currentTime;
+                    
+                    if (currentTime >= 2670 && !quizShown) {
+                        var hiddenElements = document.querySelectorAll(".invisible");
+                        hiddenElements.forEach(function(el) {
+                            el.classList.remove("invisible");
+                            el.style.display = "block"; // Garante que o display none seja removido
+                        });
+                        quizShown = true;
+                        
+                        // Força o redimensionamento do iframe
+                        window.dispatchEvent(new Event('resize'));
+                        console.log("Quiz exibido aos 44:30");
+                    }
+                };
+
+                player.addEventListener("video:timeupdate", handleTimeUpdate);
+                player.addEventListener("timeupdate", handleTimeUpdate);
             }
         });
     </script>
